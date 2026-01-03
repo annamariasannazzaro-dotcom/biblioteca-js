@@ -63,7 +63,7 @@ form.addEventListener('submit', e => {
 });
 
 for (const campo of campiDaValidare) {
-  campo.addEventListener('change', () => validaCampo(campo));
+  campo.addEventListener('input', () => validaCampo(campo));
 };
 
 for (const campo of campiDaValidare) {
@@ -113,11 +113,19 @@ function validaCampo(campo) {
 
 function popolaRigaTabella(libro) {
   let riga = tabella.insertRow();
+  //stile zebra e hover alla riga
+  riga.className = "odd:bg-white even:bg-slate-200 border-b border-slate-200 hover:bg-emerald-50 transition-colors"
   riga.insertCell().innerText = libro.titolo;
   riga.insertCell().innerText = libro.autore;
   riga.insertCell().innerText = libro.codice;
   riga.insertCell().innerText = libro.genere;
 }
+
+Array.from(riga.cells).forEach((cella,index) =>{
+  let classi="px-6 py-4 text-sm text-slate-900 font-medium";
+  classi += (index<2)? "text-left" : "text-center";
+  cella.className = classi;
+});
 
 //COSTRUTTORI
 function Libro(titolo, autore, codice, genere) {
