@@ -10,3 +10,4 @@ Esercizio di gestione libri con JavaScript puro (Vanilla JS).
 - HTML5
 - CSS3 (Versione originale)
 - JavaScript ES6
+- Tailwind nella versione aggiornata
