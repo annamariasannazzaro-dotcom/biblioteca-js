@@ -1,73 +1,184 @@
 <!DOCTYPE html>
 <html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registra libri</title>
+    <link
+      rel="shortcut icon"
+      href="ASSETS/MEDIA/favicon2.jpg"
+      type="image/x-icon"
+    />
+    <!-- collegamento rapido a tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registra libri</title>
-        <link rel="shortcut icon" href="ASSETS/MEDIA/favicon2.jpg" type="image/x-icon">
-        <!-- collegamento rapido a tailwind -->
-         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    </head>
+  <body class="bg-slate-50 font-sans antialised text-slate-900">
+    <main
+      class="flex flex-col gap-8 md:gap-12 items-center p-4 sm:p-10 min-h-screen"
+    >
+      <h1
+        class="text-center text-3xl sm:text-5xl font-extrabold text-indigo-950 pt-4 tracking-tight"
+      >
+        Library <span class="text-indigo-600">Admin</span>
+      </h1>
+      <form
+        action=""
+        class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 w-full max-w-xl flex flex-col gap-6"
+      >
+        <section
+          class="formRow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5"
+        >
+          <label
+            for="titolo"
+            class="w-full sm:w-24 text-sm font-semibold text-slave-700"
+            >Titolo*:</label
+          >
+          <div class="relative flex-1 w-full">
+            <input
+              type="text"
+              name="titolo"
+              id="titolo"
+              autofocus
+              class="daValidare w-full border border-slate-200 p-2.5 rounded-lg bg-slate-50 focus: bg-white focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:italic"
+              placeholder="Es: Il Signore degli Anelli"
+            />
+            <span
+              class="error text-red-500 text-[10px] italic absolute left-0 -bottom-5"
+            ></span>
+          </div>
+        </section>
+        <section
+          class="formRow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5"
+        >
+          <label
+            for="autore"
+            class="w-full sm:w-24 text-sm font-semibold text-slate-700"
+            >Autore*:</label
+          >
+          <div class="relative flex-1 w-full">
+            <input
+              type="text"
+              name="autore"
+              id="autore"
+              class="daValidare w-full border border-slate-200 p-2.5 rounded-lg bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:italic"
+              placeholder="Es: J.R.R. Tolkien"
+            />
+            <span
+              class="error text-red-500 text-[10px] italic absolute left-0 -bottom-5"
+            ></span>
+          </div>
+        </section>
+        <section
+          class="formRow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5"
+        >
+          <label
+            for="codice"
+            class="w-full sm:w-24 text-sm font-semibold text-slate-700"
+            >Codice*:</label
+          >
+          <div class="relative flex-1 w-full">
+            <input
+              type="text"
+              name="codice"
+              id="codice"
+              class="daValidare w-full border border-slate-200 p-2.5 rounded-lg bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:italic"
+              placeholder="Es. 123"
+            />
+            <span
+              class="error text-red-500 text-[10px] italic absolute left-0 -bottom-5"
+            ></span>
+          </div>
+        </section>
+        <section
+          class="formRow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5"
+        >
+          <label
+            for="genere"
+            class="w-full sm:w-24 text-sm font-semibold text-slate-700"
+            >Genere:</label
+          >
+          <div class="relative flex-1 w-full">
+            <select
+              name="genere"
+              id="genere"
+              class="w-full border border-slate-200 p-2.5 rounded-lg bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 transition-all"
+            >
+              <option value="" disabled selected class="text-gray-400">
+                Seleziona il genere
+              </option>
+              <option value="Romanzo">Romanzo</option>
+              <option value="Thriller">Thriller</option>
+              <option value="Storico">Storico</option>
+              <option value="Biografia">Biografia</option>
+              <option value="Fantasy">Fantasy</option>
+            </select>
+            <span
+              class="error text-red-500 text-[10px] italic absolute left-0 -bottom-5"
+            ></span>
+          </div>
+        </section>
+        <section
+          class="formRow grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 mt-4 border-t border-slate-100"
+        >
+          <input
+            type="submit"
+            value="Registra"
+            class="w-full font-bold uppercase text-[11px] tracking-widest py-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl cursor-pointer"
+          />
+          <input
+            type="reset"
+            value="Svuota campi"
+            class="w-full font-bold uppercase text-[11px] tracking-widest py-3 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl cursor-pointer"
+          />
+          <button
+            type="button"
+            id="deleteAll"
+            class="w-full font-bold uppercase text-[11px] tracking-widest py-3 text-red-600 bg-red-50 hover:bg-red-100 rounded-xl"
+          >
+            rimuovi tutto
+          </button>
+          <!-- Se non specifico il type="button" il button all'interno di un form è considerato un submit -->
+        </section>
+      </form>
+      <div
+        class="w-full max-w-xl min-h-[50px] flex items-center justify-center"
+      >
+        <p
+          id="esito"
+          class="error text-sm font-bold text-red-600 bg-red-50 border border-red-200 px-4 py-2 rounded-lg hidden animate-bounce"
+        ></p>
+      </div>
+      <div class="w-full max-w-5xl">
+        <div
+          class="overflow-x-auto shadow-2xl shadow-indigo-100 rounded-2xl border border-slate-200"
+        >
+          <table
+            class="w-full bg-white border-collapse min-w-[600px] sm:min-w-full"
+          >
+            <caption
+              class="p-6 text-left text-xl font-bold text-slate-800 border-b border-slate-100 bg-white"
+            >
+              Libri registrati
+            </caption>
+            <thead
+              class="bg-slate-50 text-slate-500 uppercase text-[11px] tracking-[0.2em]"
+            >
+              <tr>
+                <th class="px-6 py-4 text-left font-bold">Titolo</th>
+                <th class="px-6 py-4 text-left font-bold">Autore</th>
+                <th class="px-6 py-4 text-left font-bold">Codice</th>
+                <th class="px-6 py-4 text-left font-bold">Genere</th>
+                <!-- <th>Azioni</th> -->
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
 
-    <body class="bg-slate-100 font-sans">
-        <main class="flex flex-col gap-10 items-center p-10 min-h-screen"> 
-            <h1 class="text-center text-4xl uppercase font-black text-slate-800 pt-6 pb-4 tracking-tight">REGISTRAZIONE LIBRI</h1>
-            <form action="" class="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg flex flex-col items-center gap-6">
-                <section class="formRow relative flex items-center justify-between gap-5 pb-5">
-                    <label for="titolo" class="w-20">Titolo*:</label>
-                    <input type="text" name="titolo" id="titolo" autofocus class="daValidare  w-80 border border-gray-300 outline-none rounded-md bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder:text-sm placeholder:text-gray-400 placeholder:italic pl-1" placeholder="Es: Il Signore degli Anelli">
-                    <span class="error text-red-500 text-[10px] italic absolute left-[130px] bottom-1 leading-none"></span>
-                </section>
-                <section class="formRow relative flex items-center justify-between gap-5 pb-5">
-                    <label for="autore" class="w-20">Autore*:</label>
-                    <input type="text" name="autore" id="autore" class="daValidare  w-80 border border-gray-300 outline-none rounded-md bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder:text-sm placeholder:text-gray-400 placeholder:italic pl-1" placeholder="Es: J.R.R. Tolkien">
-                    <span class="error text-red-500 text-[10px] italic absolute left-[130px] bottom-1 leading-none"></span>
-                </section>
-                <section class="formRow relative flex items-center justify-between gap-5 pb-5">
-                    <label for="codice" class="w-20">Codice*:</label>
-                    <input type="text" name="codice" id="codice" class="daValidare  w-80 border border-gray-300 outline-none rounded-md bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder:text-sm placeholder:text-gray-400 placeholder:italic pl-1" placeholder="Es: 12345">
-                    <span class="error text-red-500 text-[10px] italic absolute left-[130px] bottom-1 leading-none"></span>
-                </section>
-                <section class="formRow relative flex items-center justify-between gap-5 pb-5">
-                    <label for="genere" class="w-20">Genere:</label>
-                    <select name="genere" id="genere" class=" w-80 border border-gray-300 outline-none rounded-md bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
-                        <option value="" disabled selected class="text-gray-400">Seleziona il genere</option>
-                        <option value="Romanzo">Romanzo</option>
-                        <option value="Thriller">Thriller</option>
-                        <option value="Storico">Storico</option>
-                        <option value="Biografia">Biografia</option>
-                        <option value="Fantasy">Fantasy</option>
-                    </select>
-                    <span class="error text-red-500 text-[10px] italic absolute left-[130px] bottom-1 leading-none"></span>
-                </section>
-                <section class="formRow w-full flex justify-center gap-4 pt-4 mt-2 border-t border-slate-200">
-                    <input type="submit" value="Registra" class="font-bold uppercase tracking-wider w-48 py-2 text-xs text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-700 rounded-md shadow-lg shadow-emerald-600/40 hover:shadow-emerald-600/60">
-                    <input type="reset" value="Svuota campi" class="font-bold uppercase tracking-wider w-48 py-2 text-xs text-white bg-amber-500 hover:bg-orange-400 border border-orange-700 rounded-md shadow-lg shadow-orange-600/40 hover:shadow-orange-600/60">
-                    <button type="button" id="deleteAll" class="font-bold uppercase tracking-wider w-48 py-2 text-xs text-white bg-red-700 hover:bg-red-500 border border-red-700 rounded-md shadow-lg shadow-red-500/40 hover:shadow-red-500/60">Rimuovi tutto</button>
-                    <!-- Se non specifico il type="button" il button all'interno di un form è considerato un submit -->
-                </section>
-            </form>
-            <p id="esito" class="error"></p>
-            <table class="mx-auto w-full max-w-2xl bg-white shadow-md rounded-lg overflow-hidden mt-10 mb-10 border-collapse">
-                <caption class="text-center text-3xl uppercase font-black text-slate-800 pb-6 tracking-tight">Libri registrati</caption>
-                <thead class="bg-slate-800 text-white uppercase text-xs sticky top-0">
-                    <tr>
-                        <th class="px-6 py-3 text-left tracking-wider ">Titolo</th>
-                        <th class="px-6 py-3 text-left tracking-wider">Autore</th>
-                        <th class="px-6 py-3 text-left tracking-wider">Codice</th>
-                        <th class="px-6 py-3 text-left tracking-wider">Genere</th>
-                        <!-- <th>Azioni</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </main>
-
-        <!-- FINE CODICE -->
-        <script src="ASSETS/JS/main.js"></script>
-    </body>
-
+    <!-- FINE CODICE -->
+    <script src="ASSETS/JS/main.js"></script>
+  </body>
 </html>

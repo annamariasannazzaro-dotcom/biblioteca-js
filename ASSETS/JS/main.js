@@ -44,9 +44,15 @@ form.addEventListener('submit', e => {
     //se campi validi controllo che nell'array dei libri non esista già un libro con lo stesso codice. Se esiste valorizzo il campo esito e mi fermo
     if (libri.some(elemento => elemento.codice === form.codice.value.trim())) {
       esito.textContent = `Codice ${form.codice.value} già registrato`;
+      esito.className = "w-full max-w-xl text-center text-sm font-bold text-red-600 bg-red-50 border border-red-200 px-4 py-2 rounded-lg animate-pulse my-4";
       form.codice.focus();
     } else {
       //se non esiste creo un oggetto libro, lo aggiungo all'array dei libri, aggiungo una riga alla tabella, metto l'array dei libri nel local storage, svuoto il form e rimetto il focus sul titolo
+
+      // Reset dello stile dell'esito (lo svuotiamo e lo nascondiamo)
+      esito.textContent = '';
+      esito.className = "hidden";
+
       let libro = new Libro(form.titolo.value.trim(), form.autore.value.trim(), form.codice.value, form.genere.value);
       libri.push(libro);
 
@@ -63,16 +69,45 @@ form.addEventListener('submit', e => {
 });
 
 for (const campo of campiDaValidare) {
-  campo.addEventListener('input', () => validaCampo(campo));
-};
 
-for (const campo of campiDaValidare) {
-  campo.addEventListener('focus', () => campo.classList.add("sfondoCampoFocused"));
-};
+  // saltiamo il codice (gestito a parte)
+  if (campo.id === 'codice') continue;
 
-for (const campo of campiDaValidare) {
-  campo.addEventListener('blur', () => campo.classList.remove("sfondoCampoFocused"));
-};
+  campo.addEventListener('input', () => {
+    validaCampo(campo);
+  });
+
+  campo.addEventListener('focus', () => {
+    campo.classList.add('sfondoCampoFocused');
+  });
+
+  campo.addEventListener('blur', () => {
+    campo.classList.remove('sfondoCampoFocused');
+  });
+}
+
+const campoCodice = document.getElementById('codice');
+
+// mentre scrive: pulisco messaggi (NON valido)
+campoCodice.addEventListener('input', () => {
+  campoCodice.nextElementSibling.textContent = '';
+  campoCodice.nextElementSibling.className = "error text-red-700 text-[10px] italic absolute left-0 -bottom-5";
+  esito.textContent = '';
+  esito.className = 'hidden';
+});
+
+// quando esce dal campo: valido davvero
+campoCodice.addEventListener('change', () => {
+  validaCampo(campoCodice);
+});
+
+campoCodice.addEventListener('focus', () => {
+  campoCodice.classList.add('sfondoCampoFocused');
+});
+
+campoCodice.addEventListener('blur', () => {
+  campoCodice.classList.remove('sfondoCampoFocused');
+});
 
 
 cancellaTutto.addEventListener('click', () => {
@@ -97,6 +132,8 @@ cancellaTutto.addEventListener('click', () => {
   localStorage.removeItem(LS_LIBRI_KEY); //i tre metodi in questo caso sono equivalenti
 });
 
+
+
 //ALTRE FUNZIONI
 function validaCampo(campo) {
   let msg = ''; //inizializzo la variabile ma anche resetto i messaggi di errore qualora siano presenti
@@ -113,19 +150,31 @@ function validaCampo(campo) {
 
 function popolaRigaTabella(libro) {
   let riga = tabella.insertRow();
-  //stile zebra e hover alla riga
-  riga.className = "odd:bg-white even:bg-slate-200 border-b border-slate-200 hover:bg-emerald-50 transition-colors"
+
+  riga.className =
+    "odd:bg-white even:bg-slate-50/80 border-b border-slate-100 hover:bg-indigo-50/50 transition-colors";
+
   riga.insertCell().innerText = libro.titolo;
   riga.insertCell().innerText = libro.autore;
   riga.insertCell().innerText = libro.codice;
   riga.insertCell().innerText = libro.genere;
+
+  Array.from(riga.cells).forEach((cella, index) => {
+    let classi = "px-4 sm:px-6 py-4 text-sm ";
+
+    if (index === 0) {
+      classi += "font-bold text-slate-900 text-left";
+    } else if (index === 1) {
+      classi += "italic text-slate-500 text-left";
+    } else {
+      classi += "text-left font-mono text-slate-600";
+    }
+
+    cella.className = classi;
+  });
 }
 
-Array.from(riga.cells).forEach((cella,index) =>{
-  let classi="px-6 py-4 text-sm text-slate-900 font-medium";
-  classi += (index<2)? "text-left" : "text-center";
-  cella.className = classi;
-});
+
 
 //COSTRUTTORI
 function Libro(titolo, autore, codice, genere) {
